@@ -22,7 +22,7 @@ const Todos = () => {
 
     const markComplete = id => {
         const newsTodo = todosState.map(todo => {
-            if (todo.id == id) {
+            if (todo.id === id) {
                 todo.completed = !todo.completed;
             }
             return todo;
@@ -31,10 +31,15 @@ const Todos = () => {
         setTodosState(newsTodo);
     };
 
+    const delTodo = id => {
+        const newsTodo = todosState.filter(todo => todo.id != id);
+        setTodosState(newsTodo);
+    }
+
     return (
         <Fragment>
             {todosState.map(todo => {
-                return <TodoItem todoPros={todo} markCompleteFunc={markComplete}></TodoItem>
+                return <TodoItem key={todo.id} todoPros={todo} markCompleteFunc={markComplete} delTodoFunc={delTodo}></TodoItem>
             })}
         </Fragment>
     );

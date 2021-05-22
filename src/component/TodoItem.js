@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TodoItem = (propName) => {
+    const delTodoFunc = propName.delTodoFunc;
     const todoItemStyle = {
         background: "#f4f4f4",
         padding: '10px',
@@ -21,9 +22,9 @@ const TodoItem = (propName) => {
 
     return (
         <p style={todoItemStyle}>
-            <input type="checkbox" name="" id="" onChange={propName.markCompleteFunc.bind(this, propName.todoPros.id)} checked={propName.todoPros.completed}/>
-            {propName.todoPros.title}
-            <button style={deleteButtonStyle}>Delete</button>
+            <input type="checkbox" name="" id={"todo-" + propName.todoPros.id} onChange={propName.markCompleteFunc.bind(this, propName.todoPros.id)} checked={propName.todoPros.completed}/>
+            <label htmlFor={"todo-" + propName.todoPros.id}>{propName.todoPros.title}</label>
+            <button onClick={delTodoFunc.bind(this, propName.todoPros.id)} style={deleteButtonStyle}>Delete</button>
         </p>
     );
 }
@@ -31,7 +32,8 @@ const TodoItem = (propName) => {
 // PropTypes
 TodoItem.propTypes = {
     todoPros: PropTypes.object.isRequired,
-    markCompleteFunc: PropTypes.func.isRequired
+    markCompleteFunc: PropTypes.func.isRequired,
+    delTodoFunc: PropTypes.func.isRequired
 }
 
 export default TodoItem;
