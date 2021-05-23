@@ -1,20 +1,22 @@
-import React, {Fragment, useState} from 'react';
-import TodoItem from './TodoItem';
+import React, {Fragment, useState} from 'react'
+import TodoItem from './TodoItem'
+import AddTodo from './AddTodo'
+import { v4 as uuidv4 } from 'uuid'
 
 const Todos = () => {
     const [todosState, setTodosState] = useState([
         {
-            id: 1,
+            id: uuidv4(),
             title: "Work 1",
             completed: true,
         },
         {
-            id: 2,
+            id: uuidv4(),
             title: "Work 2",
             completed: false,
         },
         {
-            id: 3,
+            id: uuidv4(),
             title: "Work 3",
             completed: false,
         }
@@ -36,8 +38,18 @@ const Todos = () => {
         setTodosState(newsTodo);
     }
 
+    const addTodo = title => {
+        const newsTodo = [...todosState, {
+            id: uuidv4(),
+            title,
+            completed: false,
+        }];
+        setTodosState(newsTodo);
+    }
+
     return (
         <Fragment>
+            <AddTodo addTodoFunc={addTodo}/>
             {todosState.map(todo => {
                 return <TodoItem key={todo.id} todoPros={todo} markCompleteFunc={markComplete} delTodoFunc={delTodo}></TodoItem>
             })}
