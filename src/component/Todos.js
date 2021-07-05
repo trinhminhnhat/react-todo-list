@@ -1,26 +1,23 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import TodoItem from './TodoItem'
 import AddTodo from './AddTodo'
 import { v4 as uuidv4 } from 'uuid'
+import axios from 'axios'
 
 const Todos = () => {
-    const [todosState, setTodosState] = useState([
-        {
-            id: uuidv4(),
-            title: "Work 1",
-            completed: true,
-        },
-        {
-            id: uuidv4(),
-            title: "Work 2",
-            completed: false,
-        },
-        {
-            id: uuidv4(),
-            title: "Work 3",
-            completed: false,
+    const [todosState, setTodosState] = useState([]);
+
+    useEffect(() => {
+        const getTodos = async () => {
+            try {
+                const res = await axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+                setTodosState(res.data)
+            } catch (error) {
+                console.log('error: ', error.message);
+            }
         }
-    ]);
+        getTodos()
+    }, [])
 
     const markComplete = id => {
         const newsTodo = todosState.map(todo => {
@@ -33,18 +30,27 @@ const Todos = () => {
         setTodosState(newsTodo);
     };
 
-    const delTodo = id => {
-        const newsTodo = todosState.filter(todo => todo.id != id);
-        setTodosState(newsTodo);
+    const delTodo = async id => {
+        try {
+            await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+            const newsTodo = todosState.filter(todo => todo.id !== id);
+            setTodosState(newsTodo);
+        } catch (error) {
+            console.log('error: ', error.message);
+        }
     }
 
-    const addTodo = title => {
-        const newsTodo = [...todosState, {
-            id: uuidv4(),
-            title,
-            completed: false,
-        }];
-        setTodosState(newsTodo);
+    const addTodo = async title => {
+        try {
+            const res = await axios.post('https://jsonplaceholder.typicode.com/todos', {
+                title,
+                completed: false,
+            })
+            const newsTodo = [...todosState, res.data];
+            setTodosState(newsTodo)
+        } catch (error) {
+            console.log('error: ', error.message);
+        }
     }
 
     return (
