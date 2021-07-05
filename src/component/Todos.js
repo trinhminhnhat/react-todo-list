@@ -1,7 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import TodoItem from './TodoItem'
 import AddTodo from './AddTodo'
-import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 
 const Todos = () => {
