@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import React from 'react';
+import React, {Fragment} from 'react';
 import './App.css';
 import Header from './component/Header';
 import Footer from './component/Footer';
@@ -7,11 +7,13 @@ import Todos from './component/Todos';
 
 const App = () => {
   return (
-    <div className="app">
+    <Fragment>
       <Header />
-      <Todos />
+      <div className="app">
+        <Todos />
+      </div>
       <Footer />
-    </div>
+    </Fragment>
   );
 }
 

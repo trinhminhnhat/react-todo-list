@@ -17,9 +17,9 @@ const AddTodo = props => {
     }
 
     return (
-        <form onSubmit={addSingleTodo}>
-            <input type="text" name="title" id="" placeholder="Name" value={title} onChange={changeTitle}/>
-            <input type="submit" value="Add"/>
+        <form className="add-todo-form" onSubmit={addSingleTodo}>
+            <input type="text" name="title" className="add-todo-form__input" placeholder="Name" value={title} onChange={changeTitle}/>
+            <input type="submit" className="add-todo-form__btn-add btn" value="Add"/>
         </form>
     )
 }

@@ -55,9 +55,11 @@ const Todos = () => {
     return (
         <Fragment>
             <AddTodo addTodoFunc={addTodo}/>
-            {todosState.map(todo => {
-                return <TodoItem key={todo.id} todoPros={todo} markCompleteFunc={markComplete} delTodoFunc={delTodo}></TodoItem>
-            })}
+            <ul className="todo-list">
+                {todosState.map(todo => {
+                    return <TodoItem key={todo.id} todoPros={todo} markCompleteFunc={markComplete} delTodoFunc={delTodo}></TodoItem>
+                })}
+            </ul>
         </Fragment>
     );
 }
