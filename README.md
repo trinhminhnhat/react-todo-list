@@ -15,4 +15,4 @@ npm start
 [**https://trinhminhnhat.github.io/react-todo-list/**](https://trinhminhnhat.github.io/react-todo-list/)
 
 ## Author
-[**Trinh Minh Nhat**](https://github.com/trinhminhnhat)
+[**Trịnh Minh Nhật**](https://github.com/trinhminhnhat)
